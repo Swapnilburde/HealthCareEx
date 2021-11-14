@@ -1,0 +1,49 @@
+master:
+  user:
+    email: swapnilburde2222@gmail.com
+    name: Swapnil
+server:
+  port: 2222
+
+#Postgres
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true  
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  
+#Mysql
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver #com.mysql.jdbc.Driver
+#    password: root
+#    url: jdbc:mysql://localhost/healthcare
+#    username: root
+#  jpa:
+#    database-platform: org.hibernate.dialect.MySQL8Dialect
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+
+  mail:
+    host: smtp.gmail.com
+    password: Youtube.
+    port: 587
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+    username: 97.java.swap@gmail.com

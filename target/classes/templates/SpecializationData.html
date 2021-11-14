@@ -1,0 +1,75 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<title>Specialization Data</title>
+<div th:replace="fragments/commonui :: header"></div>
+</head>
+
+<body>
+	<div th:replace="fragments/commonui :: menu"></div>
+	<div class="container">
+		<div class="card">
+			<div class="card-header bg-primary text-center text-white">
+				<h3>Specialization Information</h3>
+			</div>
+			<div class="card-body">
+				<a th:href="@{/spec/excel}" class="btn btn-success">Excel <i
+					class="fa fa-file-excel-o" aria-hidden="true"></i></a>
+				<a th:href="@{/spec/pdf}" class="btn btn-primary">PDF <i class="fa fa-file-pdf-o" aria-hidden="true"></i></a>  
+				<table class="table table-hower">
+					<tr class="row">
+						<th class="col-1">ID</th>
+						<th class="col-1">CODE</th>
+						<th class="col-2">NAME</th>
+						<th class="col-5">NOTE</th>
+						<th class="col-3">OPERATION</th>
+					</tr>
+					<tr class="row" th:each="ob:${list}">
+						<td class="col-1" th:text="${ob.id}"></td>
+						<td class="col-1" th:text="${ob.specCode}"></td>
+						<td class="col-2" th:text="${ob.specName}"></td>
+						<td class="col-5" th:text="${ob.specNote}"></td>
+						<td class="col-3"><a th:href="@{/spec/delete(id=${ob.id})}"
+							class="btn btn-danger">DELETE <i class="fa fa-trash-o"
+								aria-hidden="true"></i>
+						</a> | <a th:href="@{/spec/edit(id=${ob.id})}" class="btn btn-warning">EDIT
+								<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						</a></td>
+					</tr>
+				</table>
+
+				<hr>
+				
+				<nav aria-label="Page navigation example">
+					<ul class="pagination justify-content-center">
+						<li th:if="${!page.isFirst()}" class="page-item">
+							<a th:href="@{/spec/all(page=0)}" class="page-link"
+							tabindex="-1" aria-disabled="true">First</a>
+						</li>
+						<li th:if="${page.hasPrevious()}" class="page-item">
+							<a th:href="@{/spec/all(page=${page.number-1})}" class="page-link"
+							tabindex="-1" aria-disabled="true">Previous</a>
+						</li>
+						<th:block th:each="i:${#numbers.sequence(0,page.totalPages-1)}">
+							<li class="page-item">
+								<a class="page-link" th:href="@{/spec/all(page=${i})}">[[${i+1}]]</a>
+							</li>
+						</th:block>
+						<li th:if="${page.hasNext()}" class="page-item">
+							<a th:href="@{/spec/all(page=${page.number+1})}" class="page-link" >Next</a>
+						</li>
+						<li th:if="${!page.isLast()}" class="page-item">
+							<a th:href="@{/spec/all(page=${page.totalPages-1})}" class="page-link"
+							tabindex="-1" aria-disabled="true">Last</a>
+						</li>
+					</ul>
+				</nav>
+
+			</div>
+			<div th:if="${message!=null}"
+				class="card-footer bg-white text-success">
+				<span th:text="${message}"></span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
